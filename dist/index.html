@@ -24,7 +24,8 @@
       <div class="topInfo">
         <div class="topLeft">
           <img src="http://openweathermap.org/img/w/10d.png" class="selectedDayImg">
-          <span class="selectedDayTemp">86 
+          <span class="selectedDayTemp">
+            <span class="selectedDayTempNum">86</span>
             <sup class="selectedDayTempTypes">
               <span class="selectedDayFarenheit">°F</span>
               |
@@ -32,25 +33,22 @@
             </sup>
 
             <span class="extraConditionsInfo">
-              <span>Precipitation: 20%</span>
-              </br>
-              <span>Humidity: 75%</span></br>
-              <span>Humidity: 75%</span>
+              <span class="humidity">Humidity: 75%</span></br>
+              <span class="wind">Wind: 13</span>
+              <span class="windSpeedUnit">mph</span>
             </span>
           </span>
         </div>
 
         <div class="topRight">
-          <div>Kendale Lakes, FL</div>
-          <div>Sunday</div>
-          <div>Cloudy</div>
+          <div class=topLocation>Kendale Lakes, FL</div>
+          <div class="topDay">Sunday</div>
+          <div class="topWeatherDesc">Cloudy</div>
         </div>
       </div>
 
       <div class="chartTypes">
         <span class="chartType">Temperature</span>
-        <span class="separator">|</span>
-        <span class="chartType">Precipitation</span>
         <span class="separator">|</span>
         <span class="chartType">Wind</span>
       </div>
@@ -60,7 +58,7 @@
       </div>
 
       <div class="days">
-        <span class="day">
+        <span class="day" date="Sunday, August 15, 2021 1:00 PM">
           <div class="dayName">Sun</div>
           <div class="dayImage">
             <img src="http://openweathermap.org/img/w/10d.png">

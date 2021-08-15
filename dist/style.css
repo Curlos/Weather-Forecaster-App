@@ -1,6 +1,7 @@
 html, body {
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: white;
 }
 
 .weatherInfoContainer {
@@ -13,7 +14,7 @@ html, body {
   height: 500px;
   margin: 10px;
   border-radius: 10px;
-  background-color: gray;
+  background-color: rgb(50, 87, 143);
   padding: 10px;
 }
 
@@ -70,7 +71,7 @@ html, body {
 
 .day {
   text-align: center;
-  background-color: rgb(51, 51, 51);
+  background-color: rgb(65, 115, 190);
   flex: 1 1 auto;
   border-radius: 5px;
   margin: 2px;

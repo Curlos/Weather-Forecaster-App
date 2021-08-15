@@ -1,4 +1,5 @@
-import { convertFromKelvinToFarenheit, convertFromKelvinToCelsius, convertFromCelsiusToFahrenheit, convertFromFahrenheitToCelsius} from './utils/tempConverter'
+import { convertFromKelvinToFahrenheit, convertFromKelvinToCelsius, convertFromCelsiusToFahrenheit, convertFromFahrenheitToCelsius} from './utils/tempConverter'
+import { displayData } from './DOM/dom'
 import { getCoordsFromAPI, getWeatherDataFromAPI } from './utils/api'
 import { unix } from 'moment'
 
@@ -7,13 +8,15 @@ const cityInput = document.getElementById('cityInput')
 const searchButton = document.getElementById('cityInputButton')
 const fahrenheit = document.getElementById('fahrenheit')
 const celsius = document.getElementById('celsius')
-const weeklyWeatherInfo = []
+const selectedDayFarenheit = document.querySelector('.selectedDayFarenheit')
+const selectedDayCelsius = document.querySelector('.selectedDayCelsius')
+let weeklyWeatherInfo = []
 
 const handleSubmit = (event) => {
   event.preventDefault()
   const location = cityInput.value
   
-  console.log(location)
+  weeklyWeatherInfo = []
   fetchFromAPI(location)
 
   return false
@@ -32,6 +35,8 @@ const fetchFromAPI = async (location) => {
       locationName: locationName, 
       day:  unix(currDay.dt).format('LLLL'),
       temp: currDay.temp.day,
+      tempNight: currDay.temp.night,
+      tempType: 'kelvin',
       feelsLike: currDay.feels_like.day,
       humidity: currDay.humidity,
       sunrise: unix(currDay.sunrise).format('LLLL'),
@@ -46,41 +51,61 @@ const fetchFromAPI = async (location) => {
   }
 
   console.log(weeklyWeatherInfo)
-
-  displayData()
+  convertToFahrenheit()
+  displayData(weeklyWeatherInfo)
 }
 
-const displayData = () => {
-  const weatherInfo = document.getElementById('weatherInfo')
-  for (let currDay of weeklyWeatherInfo) {
-    const newHTML = `Day: ${currDay.day}
-    Feels like: ${currDay.feelsLike}
-    Humidity: ${currDay.humidity}
-    iconSrc: ${currDay.iconSrc}`
-
-    weatherInfo.innerHTML += newHTML
+export const convertToFahrenheit = () => {
+  if (weeklyWeatherInfo.length === 0) {
+    return
   }
+
+  console.log(weeklyWeatherInfo)
+
+  for (let currDay of weeklyWeatherInfo) {
+    if (currDay.tempType === 'kelvin') {
+      currDay.temp = convertFromKelvinToFahrenheit(currDay.temp)
+      currDay.tempNight = convertFromKelvinToFahrenheit(currDay.tempNight)
+      currDay.tempType = 'fahrenheit'
+    } else if (currDay.tempType === 'celsius') {
+      currDay.temp = convertFromCelsiusToFahrenheit(currDay.temp)
+      currDay.tempNight = convertFromCelsiusToFahrenheit(currDay.tempNight)
+      currDay.tempType = 'fahrenheit'
+    } else if (currDay.tempType === 'fahrenheit') {
+      return
+    }
+  }
+
+  console.log(weeklyWeatherInfo)
 }
 
-const convertToFahrenheit = () => {
+export const convertToCelsius = () => {
   if (weeklyWeatherInfo.length === 0) {
     return
   }
 
   for (let currDay of weeklyWeatherInfo) {
-
+    if (currDay.tempType === 'kelvin') {
+      console.log(currDay.temp)
+      currDay.temp = convertFromKelvinToCelsius(currDay.temp)
+      currDay.tempNight = convertFromKelvinToCelsius(currDay.tempNight)
+      currDay.tempType = 'celsius'
+    } else if (currDay.tempType === 'fahrenheit') {
+      currDay.temp = convertFromFahrenheitToCelsius(currDay.temp)
+      currDay.tempNight = convertFromFahrenheitToCelsius(currDay.tempNight)
+      currDay.tempType = 'celsius'
+    } else if (currDay.tempType === 'celsius') {
+      return
+    }
   }
 
-}
-
-const convertToCelsius = () => {
-  if (weeklyWeatherInfo.length === 0) {
-    return
-  }
+  console.log(weeklyWeatherInfo)
 }
 
 searchButton.addEventListener('click', handleSubmit)
 fahrenheit.addEventListener('click', convertToFahrenheit)
 celsius.addEventListener('click', convertToCelsius)
+selectedDayFarenheit.addEventListener('click', convertToFahrenheit)
+selectedDayCelsius.addEventListener('click', convertToCelsius)
 
 console.log('hello world')
