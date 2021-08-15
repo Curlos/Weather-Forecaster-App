@@ -13,8 +13,35 @@
 
   <form type="submit" id="cityInputForm">
     <input type="text" id="cityInput" class="cityInput">
-    <button type="submit" id="cityInputButton">Search</button>
+    <button type="button" id="cityInputButton">Search</button>
+    <button type="button" id="fahrenheit">F</button>
+    <button type="button" id="celsius">C</button>
   </form>
+
+  <div class="weatherInfoContainer">
+    <div id="weatherInfo" class="weatherInfo">
+
+      <div class="topInfo">
+        <div class="topLeft">
+          <img src="http://openweathermap.org/img/w/10d.png">
+          <span class="selectedDayTemp">86 F</span>
+        </div>
+
+        <div class="topRight">
+          Kendale Lakes, FL
+        </div>
+      </div>
+
+      <div class="chart">
+
+      </div>
+
+      <div class="days">
+
+      </div>
+      
+    </div>
+  </div>
 </body>
 <script src='main.js'></script>
 </html>

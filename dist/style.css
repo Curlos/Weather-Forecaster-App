@@ -1,0 +1,16 @@
+html, body {
+  text-align: center;
+}
+
+.weatherInfoContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.weatherInfo {
+  width: 800px;
+  height: 500px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: gray;
+}
