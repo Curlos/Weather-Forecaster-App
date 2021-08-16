@@ -1,4 +1,5 @@
 import { convertFromKelvinToFahrenheit, convertFromKelvinToCelsius, convertFromCelsiusToFahrenheit, convertFromFahrenheitToCelsius} from './utils/tempConverter'
+import { convertFromMilesToKilometers, convertFromKilometersToMiles } from './utils/speedConverter'
 import { displayData } from './DOM/dom'
 import { getCoordsFromAPI, getWeatherDataFromAPI } from './utils/api'
 import { unix } from 'moment'
@@ -6,15 +7,18 @@ import { unix } from 'moment'
 const cityInputForm = document.getElementById('cityInputForm')
 const cityInput = document.getElementById('cityInput')
 const searchButton = document.getElementById('cityInputButton')
-const fahrenheit = document.getElementById('fahrenheit')
-const celsius = document.getElementById('celsius')
-const selectedDayFarenheit = document.querySelector('.selectedDayFarenheit')
+const selectedDayFahrenheit = document.querySelector('.selectedDayFahrenheit')
 const selectedDayCelsius = document.querySelector('.selectedDayCelsius')
 let weeklyWeatherInfo = []
+let selectedInfoType = 'Temperature'
 
 const handleSubmit = (event) => {
   event.preventDefault()
   const location = cityInput.value
+
+  if (location === '') {
+    return
+  }
   
   weeklyWeatherInfo = []
   fetchFromAPI(location)
@@ -44,7 +48,8 @@ const fetchFromAPI = async (location) => {
       weatherMain: currDay.weather[0].main,
       weatherDescription: currDay.weather[0].description,
       iconSrc: `http://openweathermap.org/img/w/${currDay.weather[0].icon}.png`,
-      windSpeed: currDay.wind_speed,
+      windSpeed: Math.round(currDay.wind_speed),
+      windSpeedType: 'miles'
     }
   
     weeklyWeatherInfo.push(dayInfo)
@@ -52,13 +57,16 @@ const fetchFromAPI = async (location) => {
 
   console.log(weeklyWeatherInfo)
   convertToFahrenheit()
-  displayData(weeklyWeatherInfo)
+  displayData(weeklyWeatherInfo, selectedInfoType)
 }
 
 export const convertToFahrenheit = () => {
   if (weeklyWeatherInfo.length === 0) {
     return
   }
+  selectedDayCelsius.classList.remove('selectedTempType')
+  selectedDayFahrenheit.classList.remove('selectedTempType')
+  selectedDayFahrenheit.classList.add('selectedTempType')
 
   console.log(weeklyWeatherInfo)
 
@@ -71,18 +79,26 @@ export const convertToFahrenheit = () => {
       currDay.temp = convertFromCelsiusToFahrenheit(currDay.temp)
       currDay.tempNight = convertFromCelsiusToFahrenheit(currDay.tempNight)
       currDay.tempType = 'fahrenheit'
-    } else if (currDay.tempType === 'fahrenheit') {
-      return
+    } 
+
+    if (currDay.windSpeedType === 'kilometers') {
+      currDay.windSpeed = Math.round(convertFromKilometersToMiles(currDay.windSpeed))
+      currDay.windSpeedType = 'miles'
     }
   }
 
   console.log(weeklyWeatherInfo)
+  displayData(weeklyWeatherInfo, selectedInfoType)
 }
 
 export const convertToCelsius = () => {
   if (weeklyWeatherInfo.length === 0) {
     return
   }
+
+  selectedDayFahrenheit.classList.remove('selectedTempType')
+  selectedDayCelsius.classList.remove('selectedTempType')
+  selectedDayCelsius.classList.add('selectedTempType')
 
   for (let currDay of weeklyWeatherInfo) {
     if (currDay.tempType === 'kelvin') {
@@ -91,21 +107,29 @@ export const convertToCelsius = () => {
       currDay.tempNight = convertFromKelvinToCelsius(currDay.tempNight)
       currDay.tempType = 'celsius'
     } else if (currDay.tempType === 'fahrenheit') {
-      currDay.temp = convertFromFahrenheitToCelsius(currDay.temp)
-      currDay.tempNight = convertFromFahrenheitToCelsius(currDay.tempNight)
+      currDay.temp = Number(convertFromFahrenheitToCelsius(currDay.temp).toFixed(2))
+      currDay.tempNight = Number(convertFromFahrenheitToCelsius(currDay.tempNight))
       currDay.tempType = 'celsius'
-    } else if (currDay.tempType === 'celsius') {
-      return
+    } 
+
+    if (currDay.windSpeedType === 'miles') {
+      currDay.windSpeed = Math.round((convertFromMilesToKilometers(currDay.windSpeed)))
+      currDay.windSpeedType = 'kilometers'
     }
   }
 
   console.log(weeklyWeatherInfo)
+  displayData(weeklyWeatherInfo, selectedInfoType)
 }
 
+const displayDefaultCityWeatherInfo = () => {
+  cityInput.value = 'London'
+  searchButton.click()
+}
+
+cityInputForm.addEventListener('submit', handleSubmit)
 searchButton.addEventListener('click', handleSubmit)
-fahrenheit.addEventListener('click', convertToFahrenheit)
-celsius.addEventListener('click', convertToCelsius)
-selectedDayFarenheit.addEventListener('click', convertToFahrenheit)
+selectedDayFahrenheit.addEventListener('click', convertToFahrenheit)
 selectedDayCelsius.addEventListener('click', convertToCelsius)
 
-console.log('hello world')
+displayDefaultCityWeatherInfo()

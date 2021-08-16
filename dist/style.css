@@ -35,6 +35,18 @@ html, body {
   font-size: 25px;
 }
 
+.selectedDayFahrenheit:hover, .selectedDayCelsius:hover {
+  cursor: pointer;
+}
+
+.selectedTempType {
+  color: #FDD663;
+}
+
+.selectedTempType:hover {
+  cursor: pointer;
+}
+
 .extraConditionsInfo {
   display: inline-block;
   font-size: 13px;
@@ -51,9 +63,15 @@ html, body {
   padding-bottom: 6px;
 }
 
+.chartType:hover {
+  cursor: pointer;
+}
+
 .selectedChartType {
   border-bottom: 3px solid #FDD663;
 }
+
+
 
 
 
@@ -76,4 +94,8 @@ html, body {
   border-radius: 5px;
   margin: 2px;
   padding: 10px;
+}
+
+.selectedDay {
+  background-color: rgb(65, 115, 190);
 }

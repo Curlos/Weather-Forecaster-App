@@ -1,5 +1,3 @@
-import { convertToFahrenheit, convertToCelsius } from '../index'
-
 export const displayTopInfo = (currDay) => {
 
   const selectedDayImg = document.querySelector('.selectedDayImg')
@@ -27,49 +25,80 @@ export const displayTopInfo = (currDay) => {
   selectedDayTempNum.textContent = currDay.temp.toFixed(2)
   humidity.textContent = `Humidity: ${currDay.humidity}%`
   wind.textContent = `Wind speed: ${currDay.windSpeed}`
-  windSpeedUnit.textContent = `mph`
+
+  if (currDay.windSpeedType === 'kilometers') {
+    windSpeedUnit.textContent = `km/h`
+  } else {
+    windSpeedUnit.textContent = `mph`
+  }
 
   console.log('changed elements')
-
-{/* <div class="topInfo">
-        <div class="topLeft">
-          <img src="http://openweathermap.org/img/w/10d.png" class="selectedDayImg">
-          <span class="selectedDayTemp">
-            <span class="selectedDayTempNum">86</span>
-            <sup class="selectedDayTempTypes">
-              <span class="selectedDayFarenheit">°F</span>
-              |
-              <span class="selectedDayCelsius">°C</span>
-            </sup>
-
-            <span class="extraConditionsInfo">
-              <span class="humidity">Humidity: 75%</span></br>
-              <span class="wind">Wind: 13mph</span>
-            </span>
-          </span>
-        </div>
-
-        <div class="topRight">
-          <div class=topLocation>Kendale Lakes, FL</div>
-          <div class="topDay">Sunday</div>
-          <div class="topWeatherDesc">Cloudy</div>
-        </div>
-      </div> */}
 }
 
-export const displayChart = () => {
+export const displayTempChart = (weeklyWeatherInfo) => {
 
 }
 
-export const displayDaysInfo = () => {
+export const displayWindSpeedChart = (weeklyWeatherInfo) => {
 
 }
 
-export const displayData = (weeklyWeatherInfo) => {
-  const weatherInfo = document.getElementById('weatherInfo')
 
-  displayTopInfo(weeklyWeatherInfo[0])
+
+export const displayDaysTempInfo = (weeklyWeatherInfo) => {
+  const days = document.querySelector('.days')
+  days.innerHTML = ''
+  
   for (let currDay of weeklyWeatherInfo) {
-    return
+    const dayElem = document.createElement('span')
+    dayElem.classList.add('day')
+    dayElem.setAttribute('date', currDay.day)
+
+    const date = new Date(currDay.day)
+
+    const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date)
+
+    const dayName = document.createElement('div')
+    dayName.classList.add('dayName')
+    dayName.textContent = weekday.slice(0,3)
+
+    const dayImage = document.createElement('div')
+    dayImage.classList.add('dayImage')
+
+    const img = document.createElement('img')
+    img.setAttribute('src', currDay.iconSrc)
+
+    const dayTemp = document.createElement('div')
+    dayTemp.classList.add('dayTemp')
+
+    const currTemp = document.createElement('span')
+    currTemp.classList.add('currTemp')
+    currTemp.textContent = `${Math.round(currDay.temp)}° `
+
+    const tempNight = document.createElement('span')
+    tempNight.classList.add('nightTemp')
+    tempNight.textContent = ` ${Math.round(currDay.tempNight)}°`
+    
+
+    dayImage.append(img)
+    dayTemp.append(currTemp)
+    dayTemp.append(tempNight)
+    dayElem.append(dayName)
+    dayElem.append(dayImage)
+    dayElem.append(dayTemp)
+    days.append(dayElem)
   }
+}
+
+
+export const displayData = (weeklyWeatherInfo, selectedInfoType) => {
+  displayTopInfo(weeklyWeatherInfo[0])
+
+  if (selectedInfoType === 'Temperature') {
+    displayTempChart(weeklyWeatherInfo)
+  } else {
+    displayWindSpeedChart(weeklyWeatherInfo)
+  }
+
+  displayDaysTempInfo(weeklyWeatherInfo)
 }

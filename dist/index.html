@@ -9,13 +9,9 @@
   <title>Weather App</title>
 </head>
 <body>
-  Weather App
-
   <form type="submit" id="cityInputForm">
     <input type="text" id="cityInput" class="cityInput">
     <button type="button" id="cityInputButton">Search</button>
-    <button type="button" id="fahrenheit">F</button>
-    <button type="button" id="celsius">C</button>
   </form>
 
   <div class="weatherInfoContainer">
@@ -25,30 +21,30 @@
         <div class="topLeft">
           <img src="http://openweathermap.org/img/w/10d.png" class="selectedDayImg">
           <span class="selectedDayTemp">
-            <span class="selectedDayTempNum">86</span>
+            <span class="selectedDayTempNum"></span>
             <sup class="selectedDayTempTypes">
-              <span class="selectedDayFarenheit">°F</span>
+              <span class="selectedDayFahrenheit selectedTempType">°F</span>
               |
               <span class="selectedDayCelsius">°C</span>
             </sup>
 
             <span class="extraConditionsInfo">
-              <span class="humidity">Humidity: 75%</span></br>
-              <span class="wind">Wind: 13</span>
-              <span class="windSpeedUnit">mph</span>
+              <span class="humidity"></span></br>
+              <span class="wind"></span>
+              <span class="windSpeedUnit"></span>
             </span>
           </span>
         </div>
 
         <div class="topRight">
-          <div class=topLocation>Kendale Lakes, FL</div>
-          <div class="topDay">Sunday</div>
-          <div class="topWeatherDesc">Cloudy</div>
+          <div class=topLocation></div>
+          <div class="topDay"></div>
+          <div class="topWeatherDesc"></div>
         </div>
       </div>
 
       <div class="chartTypes">
-        <span class="chartType">Temperature</span>
+        <span class="chartType selectedChartType">Temperature</span>
         <span class="separator">|</span>
         <span class="chartType">Wind</span>
       </div>
@@ -58,93 +54,9 @@
       </div>
 
       <div class="days">
-        <span class="day" date="Sunday, August 15, 2021 1:00 PM">
-          <div class="dayName">Sun</div>
-          <div class="dayImage">
-            <img src="http://openweathermap.org/img/w/10d.png">
-          </div>
-          <div class="dayTemp">
-            <span class="currTemp">86°</span>
-            <span class="nightTemp">79°</span>
-          </div>
-        </span>
         
-        <span class="day">
-          <div class="dayName">Sun</div>
-          <div class="dayImage">
-            <img src="http://openweathermap.org/img/w/10d.png">
-          </div>
-          <div class="dayTemp">
-            <span class="currTemp">86°</span>
-            <span class="nightTemp">79°</span>
-          </div>
-        </span>
-
-        <span class="day">
-          <div class="dayName">Sun</div>
-          <div class="dayImage">
-            <img src="http://openweathermap.org/img/w/10d.png">
-          </div>
-          <div class="dayTemp">
-            <span class="currTemp">86°</span>
-            <span class="nightTemp">79°</span>
-          </div>
-        </span>
-
-        <span class="day">
-          <div class="dayName">Sun</div>
-          <div class="dayImage">
-            <img src="http://openweathermap.org/img/w/10d.png">
-          </div>
-          <div class="dayTemp">
-            <span class="currTemp">86°</span>
-            <span class="nightTemp">79°</span>
-          </div>
-        </span>
-
-        <span class="day">
-          <div class="dayName">Sun</div>
-          <div class="dayImage">
-            <img src="http://openweathermap.org/img/w/10d.png">
-          </div>
-          <div class="dayTemp">
-            <span class="currTemp">86°</span>
-            <span class="nightTemp">79°</span>
-          </div>
-        </span>
-
-        <span class="day">
-          <div class="dayName">Sun</div>
-          <div class="dayImage">
-            <img src="http://openweathermap.org/img/w/10d.png">
-          </div>
-          <div class="dayTemp">
-            <span class="currTemp">86°</span>
-            <span class="nightTemp">79°</span>
-          </div>
-        </span>
-
-        <span class="day">
-          <div class="dayName">Sun</div>
-          <div class="dayImage">
-            <img src="http://openweathermap.org/img/w/10d.png">
-          </div>
-          <div class="dayTemp">
-            <span class="currTemp">86°</span>
-            <span class="nightTemp">79°</span>
-          </div>
-        </span>
-
-        <span class="day">
-          <div class="dayName">Sun</div>
-          <div class="dayImage">
-            <img src="http://openweathermap.org/img/w/10d.png">
-          </div>
-          <div class="dayTemp">
-            <span class="currTemp">86°</span>
-            <span class="nightTemp">79°</span>
-          </div>
-        </span>
+        
+        
       </div>
       
     </div>
