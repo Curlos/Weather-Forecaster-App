@@ -74,7 +74,31 @@ export const displayTempChart = (weeklyWeatherInfo) => {
 }
 
 export const displayWindSpeedChart = (weeklyWeatherInfo) => {
-
+  let windSpeeds = []
+  let days = []
+  Chart.defaults.global.defaultFontColor = "#fff";
+  for (let currDay of weeklyWeatherInfo) {
+    const date = new Date(currDay.day)
+    const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date)
+    windSpeeds.push(currDay.windSpeed)
+    days.push(weekday)
+  }
+  let ctx = document.getElementById('myChart').getContext('2d');
+      let myChart = new Chart(ctx, {
+        type: 'line',
+        responsive: true,
+        data: {
+          labels: days,
+          datasets: [{ 
+              data: windSpeeds,
+              label: "Wind Speeds",
+              borderColor: "#FDD663",
+              backgroundColor: "rgb(62,149,205,0.1)",
+            }, 
+          ]
+        },
+      });
+  return myChart
 }
 
 export const displayBackground = (currDay) => {

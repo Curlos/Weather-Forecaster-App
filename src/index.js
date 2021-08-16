@@ -9,6 +9,8 @@ const cityInput = document.getElementById('cityInput')
 const searchButton = document.getElementById('cityInputButton')
 const selectedDayFahrenheit = document.querySelector('.selectedDayFahrenheit')
 const selectedDayCelsius = document.querySelector('.selectedDayCelsius')
+const temperatureSpan = document.getElementById('temperatureSpan')
+const windSpan = document.getElementById('windSpan')
 let weeklyWeatherInfo = []
 let selectedInfoType = 'Temperature'
 
@@ -127,9 +129,31 @@ const displayDefaultCityWeatherInfo = () => {
   searchButton.click()
 }
 
+const displayTempChart = () => {
+  if (selectedInfoType === 'Temperature') {
+    return
+  }
+  windSpan.classList.remove('selectedChartType')
+  temperatureSpan.classList.add('selectedChartType')
+  selectedInfoType = 'Temperature'
+  displayData(weeklyWeatherInfo, selectedInfoType)
+}
+
+const displayWindSpeedChart = () => {
+  if (selectedInfoType === 'Wind Speeds') {
+    return
+  }
+  temperatureSpan.classList.remove('selectedChartType')
+  windSpan.classList.add('selectedChartType')
+  selectedInfoType = 'Wind Speeds'
+  displayData(weeklyWeatherInfo, selectedInfoType)
+}
+
 cityInputForm.addEventListener('submit', handleSubmit)
 searchButton.addEventListener('click', handleSubmit)
 selectedDayFahrenheit.addEventListener('click', convertToFahrenheit)
 selectedDayCelsius.addEventListener('click', convertToCelsius)
+temperatureSpan.addEventListener('click', displayTempChart)
+windSpan.addEventListener('click', displayWindSpeedChart)
 
 displayDefaultCityWeatherInfo()
