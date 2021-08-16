@@ -1,7 +1,3 @@
-export const convertFromMilesToKilometers = (miles) => {
-  return miles * 1.609
-}
+export const convertFromMilesToKilometers = (miles) => miles * 1.609;
 
-export const convertFromKilometersToMiles = (kilometers) => {
-  return kilometers / 1.60
-}
+export const convertFromKilometersToMiles = (kilometers) => kilometers / 1.60;

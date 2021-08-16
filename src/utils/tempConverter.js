@@ -1,15 +1,7 @@
-export const convertFromKelvinToFahrenheit = (tempKelvin) => {
-  return ((tempKelvin - 273.15) * (9/5)) + 32
-}
+export const convertFromKelvinToFahrenheit = (tempKelvin) => ((tempKelvin - 273.15) * (9 / 5)) + 32;
 
-export const convertFromKelvinToCelsius = (tempKelvin) => {
-  return tempKelvin - 273.15
-}
+export const convertFromKelvinToCelsius = (tempKelvin) => tempKelvin - 273.15;
 
-export const convertFromCelsiusToFahrenheit = (tempCelsius) => {
-  return (tempCelsius * 9/5) + 32
-}
+export const convertFromCelsiusToFahrenheit = (tempCelsius) => (tempCelsius * (9 / 5)) + 32;
 
-export const convertFromFahrenheitToCelsius = (tempFahrenheit) => {
-  return (tempFahrenheit - 32) * 5/9
-}
+export const convertFromFahrenheitToCelsius = (tempFahrenheit) => ((tempFahrenheit - 32) * 5) / 9;
