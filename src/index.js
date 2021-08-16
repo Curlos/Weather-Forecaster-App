@@ -72,11 +72,11 @@ export const convertToFahrenheit = () => {
 
   for (let currDay of weeklyWeatherInfo) {
     if (currDay.tempType === 'kelvin') {
-      currDay.temp = convertFromKelvinToFahrenheit(currDay.temp)
+      currDay.temp = Math.round(convertFromKelvinToFahrenheit(currDay.temp))
       currDay.tempNight = convertFromKelvinToFahrenheit(currDay.tempNight)
       currDay.tempType = 'fahrenheit'
     } else if (currDay.tempType === 'celsius') {
-      currDay.temp = convertFromCelsiusToFahrenheit(currDay.temp)
+      currDay.temp = Math.round(convertFromCelsiusToFahrenheit(currDay.temp))
       currDay.tempNight = convertFromCelsiusToFahrenheit(currDay.tempNight)
       currDay.tempType = 'fahrenheit'
     } 
@@ -103,12 +103,12 @@ export const convertToCelsius = () => {
   for (let currDay of weeklyWeatherInfo) {
     if (currDay.tempType === 'kelvin') {
       console.log(currDay.temp)
-      currDay.temp = convertFromKelvinToCelsius(currDay.temp)
-      currDay.tempNight = convertFromKelvinToCelsius(currDay.tempNight)
+      currDay.temp = Math.round(convertFromKelvinToCelsius(currDay.temp))
+      currDay.tempNight = Math.round(convertFromKelvinToCelsius(currDay.tempNight))
       currDay.tempType = 'celsius'
     } else if (currDay.tempType === 'fahrenheit') {
-      currDay.temp = Number(convertFromFahrenheitToCelsius(currDay.temp).toFixed(2))
-      currDay.tempNight = Number(convertFromFahrenheitToCelsius(currDay.tempNight))
+      currDay.temp = Number(Math.round(convertFromFahrenheitToCelsius(currDay.temp)))
+      currDay.tempNight = Number(Math.round(convertFromFahrenheitToCelsius(currDay.tempNight)))
       currDay.tempType = 'celsius'
     } 
 
